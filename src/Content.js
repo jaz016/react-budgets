@@ -1,6 +1,7 @@
-import TransactionFilter from './layout/Content/TransactionFilter';
-import BudgetProgress from './layout/Content/BudgetProgress';
-import DashboardCounts from './layout/Content/DashboardCounts';
+import TransactionFilter from './layout/Content/TransactionFilter/TransactionFilter';
+import BudgetProgress from './layout/Content/BudgetProgress/BudgetProgress';
+import DashboardCounts from './layout/Content/DashboardCounts/DashboardCounts';
+import ActionBoxes from './layout/Content/ActionBoxes/ActionBoxes';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
@@ -15,6 +16,9 @@ function Content() {
 		</Container>
 		<Container maxWidth="xl" sx={{my:5, display: 'flex', justifyContent: 'space-between'}}>
 			<DashboardCounts sx={{display: 'block'}}/>
+		</Container>
+		<Container maxWidth="xl" sx={{py:5, display: 'flex', justifyContent: 'space-between'}}>
+			<ActionBoxes />
 		</Container>
 		
 	  </div>

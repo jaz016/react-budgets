@@ -1,5 +1,3 @@
-import './BudgetProgress.scss';
-
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';

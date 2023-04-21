@@ -1,3 +1,6 @@
+@import './App.css';
+@import './layout/Content/BudgetProgress/BudgetProgress.scss';
+
 html,
 body,
 #root {
