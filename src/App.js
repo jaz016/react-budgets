@@ -1,13 +1,31 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Dashboard from "./layout/Content/Dashboard/Dashboard";
+import CreateTransaction from './layout/CreateTransaction/CreateTransaction';
 import CssBaseline from '@mui/material/CssBaseline';
-import Sidebar from './Sidebar.js';
-import Content from './Content.js';
+import Main from './Main.js';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />
+      },
+      {
+        path: "transaction/create",
+        element: <CreateTransaction />
+      }
+    ]
+  },
+]);
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <Sidebar />
-      <Content />
+      <RouterProvider router={router} />
     </>
     
   );

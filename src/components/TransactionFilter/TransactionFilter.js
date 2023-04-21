@@ -1,5 +1,3 @@
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { alpha, styled } from '@mui/material/styles';
 import { green, red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';

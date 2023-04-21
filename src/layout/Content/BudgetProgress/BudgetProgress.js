@@ -17,11 +17,11 @@ function BudgetProgress() {
 			
 			
 			<Grid item xs={10} className='budgetProgress-inner'>
-				<div class="budgetProgress-header">
+				<div className="budgetProgress-header">
 					<strong>Actual</strong>
 					<strong>Budget</strong>
 				</div>
-				<div class="budgetProgress-value">
+				<div className="budgetProgress-value">
 					<span>P26,297.00</span>
 					<span>P30,000.00</span>
 				</div>
