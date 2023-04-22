@@ -14,7 +14,7 @@ function Dashboard() {
 			<BudgetProgress />
 		</Grid>
 		<Grid item lg={12} sx={{ mb: 6, display: 'flex', justifyContent: 'space-between'}}>
-			<DashboardCounts sx={{display: 'block'}}/>
+			<DashboardCounts/>
 		</Grid>
 		<Grid item lg={12} sx={{ mb: 6, display: 'flex', justifyContent: 'space-between'}}>
 			<ActionBoxes />
