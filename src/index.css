@@ -1,5 +1,6 @@
 @import './App.css';
 @import './layout/Content/BudgetProgress/BudgetProgress.scss';
+@import './components/TransactionPreview/TransactionPreview.scss';
 
 html,
 body,

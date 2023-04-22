@@ -1,6 +1,8 @@
 import PageTitle from "../../components/PageTitle/PageTitle";
 import TransactionFilter from "../../components/TransactionFilter/TransactionFilter";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
+import TransactionPreview from "../../components/TransactionPreview/TransactionPreview";
+import TransactionListPreview from "../../components/TransactionListPreview/TransactionListPreview";
 import Grid from '@mui/material/Grid';
 
 function CreateTransaction() {
@@ -8,14 +10,21 @@ function CreateTransaction() {
 
 	return (
 		<Grid container>
-			<Grid item lg={12} sx={{mb:5}}>
-				<PageTitle title={pageTitle} />
+			<Grid item lg={8}>
+				<Grid item lg={6} sx={{mb:5}}>
+					<PageTitle title={pageTitle} />
+				</Grid>
+				<Grid item lg={6} sx={{mb:5}}>
+					<TransactionFilter />
+				</Grid>
+				<Grid item lg={6} sx={{mb:5}}>
+					<TransactionForm />
+				</Grid>
 			</Grid>
-			<Grid item lg={12} sx={{mb:5}}>
-				<TransactionFilter />
-			</Grid>
-			<Grid item lg={4} sx={{mb:5}}>
-				<TransactionForm />
+
+			<Grid item lg={4}>
+				<TransactionPreview />
+				<TransactionListPreview />
 			</Grid>
 		</Grid>
 	)
