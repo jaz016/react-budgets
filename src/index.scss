@@ -1,11 +1,14 @@
-@import './App.css';
-@import './layout/Content/BudgetProgress/BudgetProgress.scss';
-@import './components/TransactionPreview/TransactionPreview.scss';
+$content-bg: rgb(240, 242, 245);
 
-html,
-body,
-#root {
-  height: 100%;
+html {
+  min-height: 100%;
+  height: auto;
+  background-color: $content-bg;
+}
+
+body, #root {
+  height: 100vh;
+  background-color: $content-bg;
 }
 
 body {
@@ -21,3 +24,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@import './layout/Content/BudgetProgress/BudgetProgress.scss';
+@import './components/TransactionPreview/TransactionPreview.scss';
+@import './components/TransactionList/TransactionList.scss';

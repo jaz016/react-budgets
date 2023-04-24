@@ -7,6 +7,9 @@ import Divider from '@mui/material/Divider';
 import { Typography, Button } from "@mui/material";
 
 function TransactionListPreview() {
+
+	const dummyList = Array(15).fill(null);
+
 	return (
 		<>
 			<div id='transaction-list-preview-title' style={{display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
@@ -14,86 +17,21 @@ function TransactionListPreview() {
 				<Button variant="contained" color='success'>View all</Button>
 			</div>
 			<List sx={{ maxHeight: '500px', overflowY: 'scroll' }}>
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem sx={{pl: 0}}secondaryAction={
-                    <IconButton edge="end" aria-label="edit">
-                      <DriveFileRenameOutlineIcon />
-                    </IconButton>
-                  }>
-					<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
-					<ListItemText primary='Food: Grocery'></ListItemText>
-				</ListItem>
+				{
+					dummyList.map((item, idx) => (
+						<>
+						<ListItem key={idx} sx={{pl: 0}}secondaryAction={
+							<IconButton edge="end" aria-label="edit">
+							  <DriveFileRenameOutlineIcon />
+							</IconButton>
+						  }>
+							<ListItemText primary='Expense' secondary='-P749.00'></ListItemText>
+							<ListItemText primary='Food: Grocery'></ListItemText>
+						</ListItem>
+						<Divider />
+						</>
+					))
+				}
 			</List>
 		</>
 	)

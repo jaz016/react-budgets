@@ -7,7 +7,7 @@ function Main() {
 		<>
 			<Sidebar />
 
-			<div className='content-area' style={{marginLeft: '240px', height: '100%', backgroundColor: 'rgb(240, 242, 245)'}}>
+			<div className='content-area' style={{marginLeft: '240px', height: '100%'}}>
 				<Container maxWidth='xl' sx={{pt: 5}}>
 					<Outlet />
 				</Container>
