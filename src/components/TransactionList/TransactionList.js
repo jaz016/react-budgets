@@ -19,7 +19,7 @@ function TransactionList() {
 				{
 					dummyList.map((item, idx) => (
 						<>
-							<ListItem className='transaction-item' key={idx} sx={{pl: 0, mb: 2}} secondaryAction={
+							<ListItem className='transaction-date-item' key={idx} sx={{pl: 0, mb: 2}} secondaryAction={
 								<span className='transaction-date-total'>P20,585.00</span>
 							}>
 								 <ListItemAvatar>
@@ -36,24 +36,24 @@ function TransactionList() {
 							<List>
 									{
 										dummyList2.map((item2, idx2) => (
-											<ListItem key={idx2}>
+											<ListItem key={idx2} className='transaction-item'>
 												<Grid container>
-													<Grid item xs={3}>
+													<Grid item xs={3} className='transaction-item-amount'>
 														<strong>-P443.00</strong>
 													</Grid>
-													<Grid item xs={3}>
+													<Grid item xs={3} className='transaction-item-category'>
 														<Typography variant='subtitle1'>Grocery</Typography>
 														<Typography variant='subtitle2'>Food</Typography>
 													</Grid>
-													<Grid item xs={5}>
+													<Grid item xs={5} className='transaction-item-notes'>
 														<table>
 															<tr>
-																<td>Notes:</td>
-																<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu erat sed arcu tristique porttitor. Proin hendrerit sem justo, sed ultricies </td>
+																<td className='transaction-item-notes-label'>Notes:</td>
+																<td className='transaction-item-notes-text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu erat sed arcu tristique porttitor. Proin hendrerit sem justo, sed ultricies </td>
 															</tr>
 														</table>
 													</Grid>
-													<Grid item xs={1}>
+													<Grid item xs={1} className='transaction-item-action'>
 														<IconButton>
 															<DeleteIcon />
 														</IconButton>

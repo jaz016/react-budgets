@@ -2,7 +2,7 @@ $border-color: rgba(0, 0, 0, 0.12);
 $transaction-font-size: 1.3rem;
 $transaction-font-weight: 700;
 
-.transaction-item {
+.transaction-date-item {
 	border-top: 1px solid $border-color;
 
 	.MuiListItemAvatar-root {
@@ -38,6 +38,53 @@ $transaction-font-weight: 700;
     		font-weight: $transaction-font-weight;
 		}
 
+	}
+}
+
+.transaction-item {
+
+	.MuiGrid-container {
+		display: flex;
+		align-items: center;
+		padding: 1rem 0 3rem;
+	}
+
+	.transaction-item-amount {
+
+		strong {
+			font-weight: $transaction-font-weight;
+    		font-size: $transaction-font-size;
+			color: red;
+		}
+	}
+
+	.transaction-item-category {
+
+
+		.MuiTypography-root.MuiTypography-subtitle1 {
+			font-weight: $transaction-font-weight;
+    		font-size: $transaction-font-size;
+		}
+
+		.MuiTypography-root.MuiTypography-subtitle2 {
+			font-style: italic;
+			font-weight: normal;
+		}
+	}
+
+	.transaction-item-notes {
+
+		table tr {
+
+			td.transaction-item-notes-label {
+				font-weight: $transaction-font-weight;
+			}
+
+			td.transaction-item-notes-text {
+				padding: 0 4rem;
+    			font-size: 0.9rem;
+			}
+		}
 	}
 }
 
