@@ -1,0 +1,237 @@
+{
+	"transactions": [
+		{
+			"id": 1,
+			"type": "Expense",
+			"name": "Grocery",
+			"amount": 4230,
+			"category": "Food",
+			"datetime": "2023-05-21T13:42:58.005Z",
+			"notes": "this is some notes"
+		},
+		{
+			"id": 2,
+			"type": "Expense",
+			"name": "Restaurant",
+			"amount": 2500,
+			"category": "Food",
+			"datetime": "2023-05-20T18:30:12.001Z",
+			"notes": "dinner with friends"
+		},
+		{
+			"id": 3,
+			"type": "Expense",
+			"name": "Gas",
+			"amount": 5000,
+			"category": "Transportation",
+			"datetime": "2023-05-19T09:15:47.003Z",
+			"notes": "filled up the car"
+		},
+		{
+			"id": 4,
+			"type": "Expense",
+			"name": "Movie Tickets",
+			"amount": 1500,
+			"category": "Entertainment",
+			"datetime": "2023-05-18T20:20:02.008Z",
+			"notes": "watched a new release"
+		},
+		{
+			"id": 5,
+			"type": "Expense",
+			"name": "Gym Membership",
+			"amount": 3000,
+			"category": "Fitness",
+			"datetime": "2023-05-17T12:05:32.011Z",
+			"notes": "monthly fee"
+		},
+		{
+			"id": 6,
+			"type": "Expense",
+			"name": "Clothing",
+			"amount": 2000,
+			"category": "Shopping",
+			"datetime": "2023-05-16T15:45:10.004Z",
+			"notes": "bought new shirts"
+		},
+		{
+			"id": 7,
+			"type": "Expense",
+			"name": "Internet Bill",
+			"amount": 4000,
+			"category": "Utilities",
+			"datetime": "2023-05-15T08:22:21.009Z",
+			"notes": "monthly subscription"
+		},
+		{
+			"id": 8,
+			"type": "Expense",
+			"name": "Mobile Phone",
+			"amount": 15000,
+			"category": "Electronics",
+			"datetime": "2023-05-14T16:18:15.007Z",
+			"notes": "upgraded to the latest model"
+		},
+		{
+			"id": 9,
+			"type": "Expense",
+			"name": "Taxi Fare",
+			"amount": 750,
+			"category": "Transportation",
+			"datetime": "2023-05-13T09:55:07.002Z",
+			"notes": "ride to the airport"
+		},
+		{
+			"id": 10,
+			"type": "Expense",
+			"name": "Books",
+			"amount": 2000,
+			"category": "Education",
+			"datetime": "2023-05-12T14:30:45.006Z",
+			"notes": "purchased study materials"
+		},
+		{
+			"id": 11,
+			"type": "Expense",
+			"name": "Coffee",
+			"amount": 350,
+			"category": "Food",
+			"datetime": "2023-05-11T07:40:18.001Z",
+			"notes": "morning pick-me-up"
+		},
+		{
+			"id": 12,
+			"type": "Expense",
+			"name": "Concert Tickets",
+			"amount": 5000,
+			"category": "Entertainment",
+			"datetime": "2023-05-10T19:15:02.005Z",
+			"notes": "favorite band's concert"
+		},
+		{
+			"id": 13,
+			"type": "Expense",
+			"name": "Medical Expenses",
+			"amount": 10000,
+			"category": "Health",
+			"datetime": "2023-05-09T11:10:35.001Z",
+			"notes": "doctor's appointment"
+		},
+		{
+			"id": 14,
+			"type": "Expense",
+			"name": "Home Decor",
+			"amount": 3000,
+			"category": "Shopping",
+			"datetime": "2023-05-08T14:45:20.009Z",
+			"notes": "new curtains and rugs"
+		},
+		{
+			"id": 15,
+			"type": "Expense",
+			"name": "Electricity Bill",
+			"amount": 6000,
+			"category": "Utilities",
+			"datetime": "2023-05-07T09:30:10.002Z",
+			"notes": "monthly bill payment"
+		},
+		{
+			"id": 16,
+			"type": "Expense",
+			"name": "Laptop",
+			"amount": 50000,
+			"category": "Electronics",
+			"datetime": "2023-05-06T17:55:45.008Z",
+			"notes": "purchased a high-end laptop"
+		},
+		{
+			"id": 17,
+			"type": "Expense",
+			"name": "Subway Fare",
+			"amount": 200,
+			"category": "Transportation",
+			"datetime": "2023-05-05T08:40:30.001Z",
+			"notes": "commute to work"
+		},
+		{
+			"id": 18,
+			"type": "Expense",
+			"name": "Language Course",
+			"amount": 4000,
+			"category": "Education",
+			"datetime": "2023-05-04T12:15:59.006Z",
+			"notes": "improving language skills"
+		},
+		{
+			"id": 19,
+			"type": "Expense",
+			"name": "Snacks",
+			"amount": 500,
+			"category": "Food",
+			"datetime": "2023-05-03T09:05:12.004Z",
+			"notes": "office snacks"
+		},
+		{
+			"id": 20,
+			"type": "Expense",
+			"name": "Movie Rental",
+			"amount": 300,
+			"category": "Entertainment",
+			"datetime": "2023-05-02T20:25:05.011Z",
+			"notes": "watched a recent release"
+		}
+	],
+	"categories": [
+		{
+			"id": 1,
+			"type": "Expense",
+			"name": "Food"
+		},
+		{
+			"id": 2,
+			"type": "Expense",
+			"name": "Transportation"
+		},
+		{
+			"id": 3,
+			"type": "Expense",
+			"name": "Entertainment"
+		},
+		{
+			"id": 4,
+			"type": "Expense",
+			"name": "Fitness"
+		},
+		{
+			"id": 5,
+			"type": "Expense",
+			"name": "Shopping"
+		},
+		{
+			"id": 6,
+			"type": "Expense",
+			"name": "Utilities"
+		},
+		{
+			"id": 7,
+			"type": "Expense",
+			"name": "Electronics"
+		},
+		{
+			"id": 8,
+			"type": "Expense",
+			"name": "Education"
+		},
+		{
+			"id": 9,
+			"type": "Expense",
+			"name": "Health"
+		}
+	],
+	"budgets": {
+		"daily": 0,
+		"weekly": 0,
+		"monthly": 0,
+		"showInHomepage": ""
+	}
+}
