@@ -37,9 +37,9 @@ function TransactionFilter() {
 
 	return (
 		<div className='transactionFilter-wrap'>
-			<label for='transaction-type'><strong>Income</strong></label>
+			<label htmlFor='transaction-type'><strong>Income</strong></label>
 			<TransactionSwitch id='transaction-type' defaultChecked value={isExpense} onChange={(e) => handleTransactionChange(e.target.checked)} />
-			<label for='transaction-type'><strong>Expense</strong></label>
+			<label htmlFor='transaction-type'><strong>Expense</strong></label>
 		</div>
 	)
 

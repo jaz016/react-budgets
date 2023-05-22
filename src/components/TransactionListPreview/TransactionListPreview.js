@@ -14,12 +14,16 @@ function TransactionListPreview() {
 	// const dummyList = Array(15).fill(null);
 
 	useEffect(() => {
+
+		const itemLimit = 10;
+		const url = `http://localhost:8080/transactions?_sort=datetime&_order=desc&_limit=${itemLimit}`;
+
 		try {
-			fetch('http://localhost:8080/transactions')
+			fetch(url)
 			.then(res => res.json())
 			.then(data => {
 				setTransactions(t => [...t,...data]);
-				setIsFetching(!isFetching);
+				setIsFetching(false);
 			})
 		} catch(err) {
 			throw err;
