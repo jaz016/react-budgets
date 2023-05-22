@@ -3,6 +3,7 @@ import Dashboard from "./layout/Content/Dashboard/Dashboard";
 import CreateTransaction from './layout/CreateTransaction/CreateTransaction';
 import Main from './Main.js';
 import ViewTransactions from "./layout/ViewTransactions/ViewTransactions";
+import EditTransaction from "./layout/EditTransaction/EditTransaction";
 import Categories from "./layout/Categories/Categories";
 import Budgets from "./layout/Budgets/Budgets";
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
 			{
 				path: "transaction/view",
 				element: <ViewTransactions />
+			},
+			{
+				path: "transaction/edit/:id",
+				element: <EditTransaction />
 			},
 			{
 				path: "categories",

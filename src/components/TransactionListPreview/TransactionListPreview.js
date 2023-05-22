@@ -16,6 +16,7 @@ function TransactionListPreview() {
 	let [isFetching, setIsFetching] = useState(true);
 
 	const transactionBaseUrl = `/transaction/view`;
+	const editTransactionBaseUrl = `/transaction/edit`;
 
 	useEffect(() => {
 
@@ -46,11 +47,11 @@ function TransactionListPreview() {
 						transactions.map((item, idx) => (
 							<>
 							<ListItem key={item.id} sx={{pl: 0}} secondaryAction={
-								<IconButton component={Link} to={`${transactionBaseUrl}/${item.id}`} edge="end" aria-label="edit">
+								<IconButton component={Link} to={`${editTransactionBaseUrl}/${item.id}`} edge="end" aria-label="edit">
 									<DriveFileRenameOutlineIcon />
 								</IconButton>
 							}>
-								<ListItemText primary={item.type} secondary={formatMoney(item.amount)} sx={{color: item.type.toLowerCase()==='income' ? green[600] : (item.type.toLowerCase()==='expense' ? red[600] : 'initial') }}></ListItemText>
+								<ListItemText primary={item.type.toUpperCase()} secondary={formatMoney(item.amount)} sx={{color: item.type==='income' ? green[600] : (item.type==='expense' ? red[600] : 'initial') }}></ListItemText>
 								<ListItemText primary={item.category + ': ' + item.name}></ListItemText>
 							</ListItem>
 							<Divider />

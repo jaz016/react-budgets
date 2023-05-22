@@ -2,7 +2,7 @@
 	"transactions": [
 		{
 			"id": 1,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Grocery",
 			"amount": 4230,
 			"category": "Food",
@@ -11,7 +11,7 @@
 		},
 		{
 			"id": 2,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Restaurant",
 			"amount": 2500,
 			"category": "Food",
@@ -20,7 +20,7 @@
 		},
 		{
 			"id": 3,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Gas",
 			"amount": 5000,
 			"category": "Transportation",
@@ -29,7 +29,7 @@
 		},
 		{
 			"id": 4,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Movie Tickets",
 			"amount": 1500,
 			"category": "Entertainment",
@@ -38,7 +38,7 @@
 		},
 		{
 			"id": 5,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Gym Membership",
 			"amount": 3000,
 			"category": "Fitness",
@@ -47,7 +47,7 @@
 		},
 		{
 			"id": 6,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Clothing",
 			"amount": 2000,
 			"category": "Shopping",
@@ -56,7 +56,7 @@
 		},
 		{
 			"id": 7,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Internet Bill",
 			"amount": 4000,
 			"category": "Utilities",
@@ -65,7 +65,7 @@
 		},
 		{
 			"id": 8,
-			"type": "Income",
+			"type": "income",
 			"name": "Work",
 			"amount": 15000,
 			"category": "Salary",
@@ -74,7 +74,7 @@
 		},
 		{
 			"id": 9,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Taxi Fare",
 			"amount": 750,
 			"category": "Transportation",
@@ -83,7 +83,7 @@
 		},
 		{
 			"id": 10,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Books",
 			"amount": 2000,
 			"category": "Education",
@@ -92,7 +92,7 @@
 		},
 		{
 			"id": 11,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Coffee",
 			"amount": 350,
 			"category": "Food",
@@ -101,7 +101,7 @@
 		},
 		{
 			"id": 12,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Concert Tickets",
 			"amount": 5000,
 			"category": "Entertainment",
@@ -110,7 +110,7 @@
 		},
 		{
 			"id": 13,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Medical Expenses",
 			"amount": 10000,
 			"category": "Health",
@@ -119,7 +119,7 @@
 		},
 		{
 			"id": 14,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Home Decor",
 			"amount": 3000,
 			"category": "Shopping",
@@ -128,7 +128,7 @@
 		},
 		{
 			"id": 15,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Electricity Bill",
 			"amount": 6000,
 			"category": "Utilities",
@@ -137,7 +137,7 @@
 		},
 		{
 			"id": 16,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Laptop",
 			"amount": 50000,
 			"category": "Electronics",
@@ -146,7 +146,7 @@
 		},
 		{
 			"id": 17,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Subway Fare",
 			"amount": 200,
 			"category": "Transportation",
@@ -155,7 +155,7 @@
 		},
 		{
 			"id": 18,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Language Course",
 			"amount": 4000,
 			"category": "Education",
@@ -164,7 +164,7 @@
 		},
 		{
 			"id": 19,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Snacks",
 			"amount": 500,
 			"category": "Food",
@@ -173,7 +173,7 @@
 		},
 		{
 			"id": 20,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Movie Rental",
 			"amount": 300,
 			"category": "Entertainment",
@@ -184,48 +184,53 @@
 	"categories": [
 		{
 			"id": 1,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Food"
 		},
 		{
 			"id": 2,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Transportation"
 		},
 		{
 			"id": 3,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Entertainment"
 		},
 		{
 			"id": 4,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Fitness"
 		},
 		{
 			"id": 5,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Shopping"
 		},
 		{
 			"id": 6,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Utilities"
 		},
 		{
 			"id": 7,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Electronics"
 		},
 		{
 			"id": 8,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Education"
 		},
 		{
 			"id": 9,
-			"type": "Expense",
+			"type": "expense",
 			"name": "Health"
+		},
+		{
+			"id": 10,
+			"type": "income",
+			"name": "Salary"
 		}
 	],
 	"budgets": {
