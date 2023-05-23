@@ -6,6 +6,7 @@ import ViewTransactions from "./layout/ViewTransactions/ViewTransactions";
 import EditTransaction from "./layout/EditTransaction/EditTransaction";
 import Categories from "./layout/Categories/Categories";
 import Budgets from "./layout/Budgets/Budgets";
+import Reports from "./layout/Reports/Reports";
 
 const router = createBrowserRouter([
 	{
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
 			{
 				path: "budgets",
 				element: <Budgets />
+			},
+			{
+				path: "reports",
+				element: <Reports />
 			}
 		]
 	},
