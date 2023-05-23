@@ -2,8 +2,6 @@ import { alpha, styled } from '@mui/material/styles';
 import { green, red } from '@mui/material/colors';
 import Switch from '@mui/material/Switch';
 
-import { useState } from 'react';
-
 const TransactionSwitch = styled(Switch)(({ theme }) => ({
 	'& .MuiSwitch-switchBase.Mui-checked': {
 		color: red[600],
@@ -26,19 +24,12 @@ const TransactionSwitch = styled(Switch)(({ theme }) => ({
 	  },
   }));
 
-function TransactionFilter() {
-
-	const [isExpense, setIsExpense] = useState(true);
-
-	function handleTransactionChange(value) {
-		setIsExpense(value);
-	}
-
+function TransactionFilter({ isExpense = true, onChange }) {
 
 	return (
 		<div className='transactionFilter-wrap'>
 			<label htmlFor='transaction-type'><strong>Income</strong></label>
-			<TransactionSwitch id='transaction-type' defaultChecked value={isExpense} onChange={(e) => handleTransactionChange(e.target.checked)} />
+			<TransactionSwitch id='transaction-type' checked={isExpense} onChange={(e) => onChange(e.target.checked)} />
 			<label htmlFor='transaction-type'><strong>Expense</strong></label>
 		</div>
 	)

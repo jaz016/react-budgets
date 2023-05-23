@@ -6,65 +6,80 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Button from '@mui/material/Button';
 import Textarea from '@mui/joy/Textarea';
+import TransactionFilter from "../../components/TransactionFilter/TransactionFilter";
 
-function TransactionForm({isEdit}) {
+function TransactionForm({ isEdit }) {
 
 	const { id } = useParams();
 	let [categories, setCategories] = useState([]);
+
+	let [isExpense, setIsExpense] = useState(true);
 	let [transactionName, setTransactionName] = useState('');
 	let [amount, setAmount] = useState('');
 	let [category, setCategory] = useState('');
 	let [datetime, setDatetime] = useState('');
 	let [notes, setNotes] = useState('');
 
-	useEffect(() => {
-		loadTransaction();
-	}, []);
 
 	useEffect(() => {
+
+		const loadTransaction = async () => {
+			const url = `http://localhost:8080/transactions/${id}`;
+	
+			try {
+				const res = await fetch(url);
+				const data = await res.json();
+				setIsExpense(data.type === 'expense');
+				setTransactionName(data.name);
+				setAmount(data.amount);
+				setCategory(data.category);
+				setDatetime(data.datetime);
+				setNotes(data.notes);
+			} catch(err) {
+				throw err;
+			}
+		}
+
+		if(id) {
+			loadTransaction();
+		}
+
+	}, [id]);
+
+	useEffect(() => {
+		const loadCategories = async () => {
+			const url = `http://localhost:8080/categories/`;
+	
+			try {
+				const res = await fetch(url);
+				const data = await res.json();
+				setCategories(data);
+			} catch(err) {
+				throw err;
+			}
+		}
+
 		loadCategories();
 	}, []);
 
-	const loadTransaction = async () => {
-		const url = `http://localhost:8080/transactions/${id}`;
-
-		try {
-			const res = await fetch(url);
-			const data = await res.json();
-			setTransactionName(data.name);
-			setAmount(data.amount);
-			setCategory(data.category);
-			setDatetime(data.datetime);
-			setNotes(data.notes);
-		} catch(err) {
-			throw err;
-		}
+	const handleTransactionTypeChange = data => {
+		setIsExpense(data)
 	}
 
-	const loadCategories = async () => {
-		const url = `http://localhost:8080/categories/`;
-
-		try {
-			const res = await fetch(url);
-			const data = await res.json();
-			setCategories(data);
-		} catch(err) {
-			throw err;
-		}
-	}
-
-	const handleChange = (e) => {
+	const handleCategoryChange = (e) => {
 		setCategory(e.target.value)
 	}
 
 	return (
 		<>
-			<TextField id="outlined-basic" label="Expense Name" variant="outlined" margin='normal' fullWidth sx={{background:'#fff'}} value={transactionName} />
+			<TransactionFilter isExpense={isExpense} onChange={handleTransactionTypeChange} />
+			<TextField id="outlined-basic" label={ isExpense ? "Expense Name" : "Income Name"}  variant="outlined" margin='normal' fullWidth sx={{background:'#fff'}} value={transactionName} />
 			<TextField id="outlined-basic" label="Amount" variant="outlined" margin='normal' fullWidth sx={{background:'#fff'}} value={amount}
 				InputProps={{
 					startAdornment: <InputAdornment position="start">Php</InputAdornment>,
@@ -75,7 +90,7 @@ function TransactionForm({isEdit}) {
 				<Select
 					value={category}
 					label="Category"
-					onChange={handleChange}
+					onChange={handleCategoryChange}
 				>
 					{categories.map(category => (
 						<MenuItem value={category.name}>{category.name}</MenuItem>
@@ -84,7 +99,7 @@ function TransactionForm({isEdit}) {
 			</FormControl>
 			<FormControl margin='normal' fullWidth sx={{background:'#fff'}} value={datetime} >
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
-					<DatePicker label="Date/Time" />
+					<DateTimePicker label="Date/Time" value={datetime ? dayjs(new Date(datetime)) : null} onChange={newDatetime => setDatetime(newDatetime)} />
 				</LocalizationProvider>
 			</FormControl>
 			<Textarea size="lg" name="Size" variant='outlined' placeholder="Enter additional notes..." minRows={8} maxRows={8} sx={{my:2}} value={notes} />
