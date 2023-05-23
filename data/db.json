@@ -231,6 +231,11 @@
 			"id": 10,
 			"type": "income",
 			"name": "Salary"
+		},
+		{
+			"id": 11,
+			"type": "income",
+			"name": "Reimbursement"
 		}
 	],
 	"budgets": {

@@ -26,6 +26,7 @@ function TransactionForm({ isEdit }) {
 	let [datetime, setDatetime] = useState('');
 	let [notes, setNotes] = useState('');
 
+	const filterByType = isExpense ? 'expense' : 'income';
 
 	useEffect(() => {
 
@@ -53,20 +54,25 @@ function TransactionForm({ isEdit }) {
 	}, [id]);
 
 	useEffect(() => {
+		let ignore = false;
 		const loadCategories = async () => {
-			const url = `http://localhost:8080/categories/`;
-	
+			const url = `http://localhost:8080/categories/?type=${filterByType}`;
 			try {
 				const res = await fetch(url);
 				const data = await res.json();
-				setCategories(data);
+				if(!ignore)
+					setCategories(data);
 			} catch(err) {
 				throw err;
 			}
 		}
 
 		loadCategories();
-	}, []);
+		return () => {
+			ignore = true;
+		}
+		
+	}, [filterByType]);
 
 	const handleTransactionTypeChange = data => {
 		setIsExpense(data)
