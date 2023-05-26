@@ -2,7 +2,6 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import Grid from '@mui/material/Grid';
 import CategoryForm from "../../components/CategoryForm/CategoryForm";
 import CategoryTable from "../../components/CategoryTable/CategoryTable";
-import TransactionFilter from "../../components/TransactionFilter/TransactionFilter";
 
 function Categories() {
 
@@ -13,12 +12,6 @@ function Categories() {
 			<Grid item lg={12}>
 				<Grid item lg={4} sx={{mb:5}}>
 					<PageTitle title={pageTitle} />
-				</Grid>
-			</Grid>
-
-			<Grid item lg={12}>
-				<Grid item lg={4} sx={{mb:1}}>
-					<TransactionFilter />
 				</Grid>
 			</Grid>
 
