@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-function CategoryTable() {
+function CategoryTable({onEditClick}) {
 
 	let [categories, setCategories] = useState([]);
 	let [isFetching, setIsFetching] = useState(true);
@@ -52,7 +52,7 @@ function CategoryTable() {
 							</TableCell>
 							<TableCell sx={{textTransform: 'uppercase'}}>{category.type}</TableCell>
 							<TableCell>
-								<Button variant="outlined" size='small' color='success' sx={{mr: 1}}>Edit</Button> 
+								<Button variant="outlined" size='small' color='success' sx={{mr: 1}} onClick={() => onEditClick(category)}>Edit</Button> 
 								<Button variant="outlined" size='small' color='error' sx={{mr: 1}}>Delete</Button>
 							</TableCell>
 						</TableRow>
