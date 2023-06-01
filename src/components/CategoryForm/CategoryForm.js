@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import TransactionFilter from "../../components/TransactionFilter/TransactionFilter";
 
-function CategoryForm({isEdit, toEdit, onCancelClick}) {
+function CategoryForm({isEdit, toEdit, onCancelClick, onSubmitSuccess}) {
 
 	let [isExpense, setIsExpense] = useState(true);
 	let [categoryName, setCategoryName] = useState('');
@@ -38,7 +38,11 @@ function CategoryForm({isEdit, toEdit, onCancelClick}) {
 				headers: headers,
 				body: JSON.stringify(payload)
 			})
-			const data = await res.json();
+			
+			if(res.status === 200) {
+				resetForm();
+				onSubmitSuccess();
+			}
 		} catch (err) {
 			throw err;
 		}
