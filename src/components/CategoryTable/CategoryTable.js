@@ -7,7 +7,26 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-function CategoryTable({categories, isFetching, onEditClick}) {
+function CategoryTable({categories, isFetching, onEditClick, onDeleteSuccess}) {
+
+	const handleDeleteClick = async (categoryId) => {
+		if(window.confirm('Are you sure you want to delete this category?')) {
+			const url = `http://localhost:8080/categories/${categoryId}`;
+			try {
+				const res = await fetch(url, {
+					method: 'DELETE'
+				});
+
+				if(res.status === 200) {
+					alert('Category has been deleted!')
+					onDeleteSuccess();
+				}
+				
+			} catch(err) {
+				throw err;
+			}
+		}
+	}
 
 	return (
 		<TableContainer component={Paper}>
@@ -32,7 +51,7 @@ function CategoryTable({categories, isFetching, onEditClick}) {
 							<TableCell sx={{textTransform: 'uppercase'}}>{category.type}</TableCell>
 							<TableCell>
 								<Button variant="outlined" size='small' color='success' sx={{mr: 1}} onClick={() => onEditClick(category)}>Edit</Button> 
-								<Button variant="outlined" size='small' color='error' sx={{mr: 1}}>Delete</Button>
+								<Button variant="outlined" size='small' color='error' sx={{mr: 1}} onClick={() => handleDeleteClick(category.id)}>Delete</Button>
 							</TableCell>
 						</TableRow>
 					)

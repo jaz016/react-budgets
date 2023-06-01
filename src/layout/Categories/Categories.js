@@ -51,6 +51,10 @@ function Categories() {
 		setInitCategories(true);
 	}
 
+	const handleDeleteSuccess = () => {
+		setInitCategories(true);
+	}
+
 	return (
 		<Grid container>
 			<Grid item lg={12}>
@@ -61,12 +65,22 @@ function Categories() {
 
 			<Grid item lg={12}>
 				<Grid item lg={4} sx={{mb:5}}>
-					<CategoryForm isEdit={isEditMode} toEdit={categoryToEdit} onCancelClick={handleCancelClick} onSubmitSuccess={handleSubmitSuccess}/>
+					<CategoryForm 
+						isEdit={isEditMode} 
+						toEdit={categoryToEdit} 
+						onCancelClick={handleCancelClick} 
+						onSubmitSuccess={handleSubmitSuccess}
+					/>
 				</Grid>
 			</Grid>
 
 			<Grid item lg={12} sx={{my:5}}>
-				<CategoryTable categories={categories} isFetching={isFetchingCategories} onEditClick={handleEditClick} />
+				<CategoryTable 
+					categories={categories} 
+					isFetching={isFetchingCategories} 
+					onEditClick={handleEditClick} 
+					onDeleteSuccess={handleDeleteSuccess}
+				/>
 			</Grid>
 			
 		</Grid>
