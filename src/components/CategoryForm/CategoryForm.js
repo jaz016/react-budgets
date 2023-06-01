@@ -7,6 +7,10 @@ function CategoryForm({isEdit, toEdit, onCancelClick, onSubmitSuccess}) {
 
 	let [isExpense, setIsExpense] = useState(true);
 	let [categoryName, setCategoryName] = useState('');
+	let category = {
+		type: isExpense ? 'expense' : 'income', 
+		name: categoryName
+	}
 
 	const type = toEdit ? toEdit.type : null
 		 ,name = toEdit ? toEdit.name : null;
@@ -22,6 +26,32 @@ function CategoryForm({isEdit, toEdit, onCancelClick, onSubmitSuccess}) {
 
 	const handleTransactionTypeChange = data => {
 		setIsExpense(data)
+	}
+
+	const handleCreate = async (category) => {
+		const url = `http://localhost:8080/categories/`;
+		const headers = {'Content-type': 'application/json'};
+		const payload = {
+			type: category.type,
+			name: category.name,
+		}
+
+		try {
+			const res = await fetch(url, {
+				method: 'POST',
+				headers: headers,
+				body: JSON.stringify(payload)
+			});
+
+			const data = await res.json();
+			if(res.status === 201) {
+				alert(`${data.name} category has been created!`);
+				resetForm();
+				onSubmitSuccess();
+			}
+		} catch(err) {
+			throw err;
+		}
 	}
 
 	const handleSave = async (categoryId) => {
@@ -40,6 +70,7 @@ function CategoryForm({isEdit, toEdit, onCancelClick, onSubmitSuccess}) {
 			})
 			
 			if(res.status === 200) {
+				alert(`Category has been successfully edited!`);
 				resetForm();
 				onSubmitSuccess();
 			}
@@ -66,7 +97,7 @@ function CategoryForm({isEdit, toEdit, onCancelClick, onSubmitSuccess}) {
 						<Button variant="contained" color="success" sx={{float:'right'}} onClick={() => handleSave(toEdit.id)}>Save Changes</Button>
 						<Button variant="text" sx={{float:'right', marginRight: '1.5rem'}} onClick={onCancelClick}>Cancel</Button>
 					</>
-				) : <Button variant="contained" sx={{float:'right'}}>Create</Button>
+				) : <Button variant="contained" sx={{float:'right'}} onClick={() => handleCreate(category)}>Create</Button>
 			}
 		</>
 	)
