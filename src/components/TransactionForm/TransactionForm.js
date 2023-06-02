@@ -25,6 +25,14 @@ function TransactionForm({ isEdit }) {
 	let [category, setCategory] = useState('');
 	let [datetime, setDatetime] = useState('');
 	let [notes, setNotes] = useState('');
+	let transaction = {
+		type: isExpense ? 'expense' : 'income',
+		name: transactionName,
+		amount,
+		category,
+		datetime,
+		notes
+	}
 
 	const filterByType = isExpense ? 'expense' : 'income';
 
@@ -78,25 +86,67 @@ function TransactionForm({ isEdit }) {
 		setIsExpense(data)
 	}
 
-	const handleCategoryChange = (e) => {
-		setCategory(e.target.value)
+	const handleCreate = async (transaction) => {
+		const url = `http://localhost:8080/transactions/`;
+		const headers = {'Content-type': 'application/json'};
+		const payload = {...transaction, datetime: datetime.toISOString()};
+
+		try {
+			const res = await fetch(url, {
+				method: 'POST',
+				headers: headers,
+				body: JSON.stringify(payload)
+			});
+
+			const data = await res.json();
+			if(res.status === 201) {
+				resetForm();
+			}
+		} catch(err) {
+			throw err;
+		}
+	}
+
+	const resetForm = () => {
+		setIsExpense(true);
+		setTransactionName('');
+		setAmount('');
+		setCategory('');
+		setDatetime('');
+		setNotes('');
 	}
 
 	return (
 		<>
 			<TransactionFilter isExpense={isExpense} onChange={handleTransactionTypeChange} />
-			<TextField id="outlined-basic" label={ isExpense ? "Expense Name" : "Income Name"}  variant="outlined" margin='normal' fullWidth sx={{background:'#fff'}} value={transactionName} />
-			<TextField id="outlined-basic" label="Amount" variant="outlined" margin='normal' fullWidth sx={{background:'#fff'}} value={amount}
+			<TextField 
+				id="outlined-basic" 
+				label={ isExpense ? "Expense Name" : "Income Name"}  
+				variant="outlined" margin='normal' 
+				fullWidth 
+				sx={{background:'#fff'}} 
+				value={transactionName}
+				onChange={(e) => setTransactionName(e.target.value)}
+			/>
+			<TextField 
+				id="outlined-basic" 
+				label="Amount" 
+				variant="outlined" 
+				margin='normal' 
+				fullWidth 
+				sx={{background:'#fff'}} 
+				value={amount}
 				InputProps={{
 					startAdornment: <InputAdornment position="start">Php</InputAdornment>,
 				}}
+				onChange={(e) => setAmount(parseFloat(e.target.value))}
 			/>
 			<FormControl margin='normal' fullWidth sx={{background:'#fff'}}>
 				<InputLabel>Category</InputLabel>
 				<Select
 					value={category}
 					label="Category"
-					onChange={handleCategoryChange}
+					onChange={(e) => setCategory(e.target.value)}
 				>
 					{categories.map(category => (
 						<MenuItem value={category.name}>{category.name}</MenuItem>
@@ -105,10 +155,24 @@ function TransactionForm({ isEdit }) {
 			</FormControl>
 			<FormControl margin='normal' fullWidth sx={{background:'#fff'}} value={datetime} >
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
-					<DateTimePicker label="Date/Time" value={datetime ? dayjs(new Date(datetime)) : null} onChange={newDatetime => setDatetime(newDatetime)} />
+					<DateTimePicker 
+						label="Date/Time" 
+						value={datetime ? dayjs(new Date(datetime)) : null} 
+						onChange={newDatetime => setDatetime(newDatetime.$d)} 
+					/>
 				</LocalizationProvider>
 			</FormControl>
-			<Textarea size="lg" name="Size" variant='outlined' placeholder="Enter additional notes..." minRows={8} maxRows={8} sx={{my:2}} value={notes} />
+			<Textarea 
+				size="lg" 
+				name="Size" 
+				variant='outlined' 
+				placeholder="Enter additional notes..." 
+				minRows={8} 
+				maxRows={8} 
+				sx={{my:2}} 
+				value={notes} 
+				onChange={(e) => setNotes(e.target.value)}
+			/>
 			
 			{ isEdit ? (
 				<>
@@ -117,7 +181,11 @@ function TransactionForm({ isEdit }) {
 				</>
 				
  			) : (
-				<Button variant="contained" sx={{float:'right'}}>Create</Button>
+				<Button 
+					variant="contained" 
+					sx={{float:'right'}}
+					onClick={() => handleCreate(transaction)}
+				>Create</Button>
 			)}
 		</>
 	)
