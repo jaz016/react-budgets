@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import Textarea from '@mui/joy/Textarea';
 import TransactionFilter from "../../components/TransactionFilter/TransactionFilter";
 
-function TransactionForm({ isEdit }) {
+function TransactionForm({ isEdit, onSubmitSuccess }) {
 
 	const { id } = useParams();
 	let [categories, setCategories] = useState([]);
@@ -101,6 +101,7 @@ function TransactionForm({ isEdit }) {
 			const data = await res.json();
 			if(res.status === 201) {
 				resetForm();
+				onSubmitSuccess();
 			}
 		} catch(err) {
 			throw err;
@@ -149,7 +150,7 @@ function TransactionForm({ isEdit }) {
 					onChange={(e) => setCategory(e.target.value)}
 				>
 					{categories.map(category => (
-						<MenuItem value={category.name}>{category.name}</MenuItem>
+						<MenuItem key={category.id} value={category.name}>{category.name}</MenuItem>
 					))}
 				</Select>
 			</FormControl>

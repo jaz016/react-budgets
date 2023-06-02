@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PageTitle from "../../components/PageTitle/PageTitle";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import TransactionPreview from "../../components/TransactionPreview/TransactionPreview";
@@ -5,7 +6,13 @@ import TransactionListPreview from "../../components/TransactionListPreview/Tran
 import Grid from '@mui/material/Grid';
 
 function CreateTransaction() {
+	
 	const pageTitle = 'New Transaction';
+	let [initTransactionList, setInitTransactionList] = useState(true);
+
+	const handleSubmitSuccess = () => {
+		setInitTransactionList(true);
+	}
 
 	return (
 		<Grid container>
@@ -14,13 +21,13 @@ function CreateTransaction() {
 					<PageTitle title={pageTitle} />
 				</Grid>
 				<Grid item lg={6} sx={{mb:5}}>
-					<TransactionForm />
+					<TransactionForm onSubmitSuccess={handleSubmitSuccess} />
 				</Grid>
 			</Grid>
 
 			<Grid item lg={4}>
 				<TransactionPreview />
-				<TransactionListPreview />
+				<TransactionListPreview initTransactionList={initTransactionList} onInitTransactionListChange={(doInit) => setInitTransactionList(doInit)}/>
 			</Grid>
 		</Grid>
 	)

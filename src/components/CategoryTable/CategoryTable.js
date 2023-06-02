@@ -31,7 +31,7 @@ function CategoryTable({initCategories, onEditClick, onDeleteSuccess, onInitCate
 			loadCategories();
 		}
 		
-	}, [initCategories])
+	}, [initCategories, onInitCategoriesChange])
 
 	const handleDeleteClick = async (categoryId) => {
 		if(window.confirm('Are you sure you want to delete this category?')) {
