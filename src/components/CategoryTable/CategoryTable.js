@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,7 +8,30 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-function CategoryTable({categories, isFetching, onEditClick, onDeleteSuccess}) {
+function CategoryTable({initCategories, onEditClick, onDeleteSuccess, onInitCategoriesChange}) {
+
+	let [categories, setCategories] = useState([]);
+	let [isFetching, setIsFetching] = useState(true);
+
+	useEffect(() => {
+		const loadCategories = async () => {
+			const url = 'http://localhost:8080/categories';
+			try {
+				const res = await fetch(url);
+				const data = await res.json();
+				setCategories(data);
+				setIsFetching(false);
+				onInitCategoriesChange(false)
+			} catch(err) {
+				throw err;
+			}
+		}
+
+		if(initCategories) {
+			loadCategories();
+		}
+		
+	}, [initCategories])
 
 	const handleDeleteClick = async (categoryId) => {
 		if(window.confirm('Are you sure you want to delete this category?')) {

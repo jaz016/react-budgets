@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Grid from '@mui/material/Grid';
 import CategoryForm from "../../components/CategoryForm/CategoryForm";
@@ -9,32 +9,7 @@ function Categories() {
 	const pageTitle = 'Categories';
 	let [isEditMode, setIsEditMode] = useState(false);
 	let [categoryToEdit, setCategoryToEdit] = useState(null);
-
-	let [categories, setCategories] = useState([]);
-	let [isFetchingCategories, setIsFetchingCategories] = useState(true);
 	let [initCategories, setInitCategories] = useState(true);
-
-
-	useEffect(() => {
-		const loadCategories = async () => {
-			const url = 'http://localhost:8080/categories';
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-				setCategories(data);
-				setIsFetchingCategories(false);
-				setInitCategories(false);
-			} catch(err) {
-				throw err;
-			}
-		}
-
-		if(initCategories) {
-			loadCategories();
-		}
-		
-	}, [initCategories])
-
 
 	const handleEditClick = (category) => {
 		setCategoryToEdit(category);
@@ -76,10 +51,10 @@ function Categories() {
 
 			<Grid item lg={12} sx={{my:5}}>
 				<CategoryTable 
-					categories={categories} 
-					isFetching={isFetchingCategories} 
+					initCategories={initCategories}
 					onEditClick={handleEditClick} 
 					onDeleteSuccess={handleDeleteSuccess}
+					onInitCategoriesChange={(doInit) => setInitCategories(doInit)}
 				/>
 			</Grid>
 			
