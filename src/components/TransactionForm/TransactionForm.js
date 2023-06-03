@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
@@ -17,6 +17,7 @@ import TransactionFilter from "../../components/TransactionFilter/TransactionFil
 function TransactionForm({ isEdit, onSubmitSuccess }) {
 
 	const { id } = useParams();
+	const navigate = useNavigate();
 	let [categories, setCategories] = useState([]);
 
 	let [isExpense, setIsExpense] = useState(true);
@@ -128,6 +129,25 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 		}
 	}
 
+	const handleDelete = async (transactionId) => {
+		if(window.confirm('Are you sure you want to delete this transaction?')) {
+			const url = `http://localhost:8080/transactions/${transactionId}`;
+			try {
+				const res = await fetch(url, {
+					method: 'DELETE'
+				});
+
+				if(res.status === 200) {
+					alert('Transaction has been deleted!');
+					navigate('/transaction/create');
+				}
+				
+			} catch(err) {
+				throw err;
+			}
+		}
+	}
+
 	const resetForm = () => {
 		setIsExpense(true);
 		setTransactionName('');
@@ -202,7 +222,11 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 						color="success" 
 						sx={{float:'right'}}
 						onClick={() => handleSave(id)} >Save Changes</Button>
-					<Button variant="contained" color="error" sx={{float:'right', marginRight: '0.5rem'}} >Delete Transaction</Button>
+					<Button 
+						variant="contained" 
+						color="error" 
+						sx={{float:'right', marginRight: '0.5rem'}} 
+						onClick={() => handleDelete(id)} >Delete Transaction</Button>
 				</>
 				
  			) : (
