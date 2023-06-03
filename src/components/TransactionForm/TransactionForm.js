@@ -48,7 +48,7 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 				setTransactionName(data.name);
 				setAmount(data.amount);
 				setCategory(data.category);
-				setDatetime(data.datetime);
+				setDatetime(dayjs(new Date(data.datetime)));
 				setNotes(data.notes);
 			} catch(err) {
 				throw err;
@@ -108,6 +108,26 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 		}
 	}
 
+	const handleSave = async (transactionId) => {
+		const url = `http://localhost:8080/transactions/${transactionId}`;
+		const headers = {'Content-type': 'application/json'};
+		const payload = {...transaction, datetime: datetime.toISOString()};
+
+		try {
+			const res = await fetch(url, {
+				method: 'PUT',
+				headers: headers,
+				body: JSON.stringify(payload)
+			})
+			
+			if(res.status === 200) {
+				alert(`Transaction has been successfully edited!`);
+			}
+		} catch (err) {
+			throw err;
+		}
+	}
+
 	const resetForm = () => {
 		setIsExpense(true);
 		setTransactionName('');
@@ -158,7 +178,7 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
 					<DateTimePicker 
 						label="Date/Time" 
-						value={datetime ? dayjs(new Date(datetime)) : null} 
+						value={datetime ? datetime : null} 
 						onChange={newDatetime => setDatetime(newDatetime.$d)} 
 					/>
 				</LocalizationProvider>
@@ -177,7 +197,11 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 			
 			{ isEdit ? (
 				<>
-					<Button variant="contained" color="success" sx={{float:'right'}} >Save Changes</Button>
+					<Button 
+						variant="contained" 
+						color="success" 
+						sx={{float:'right'}}
+						onClick={() => handleSave(id)} >Save Changes</Button>
 					<Button variant="contained" color="error" sx={{float:'right', marginRight: '0.5rem'}} >Delete Transaction</Button>
 				</>
 				
