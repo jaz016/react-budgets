@@ -1,5 +1,6 @@
 export { formatMoney } from './money';
 export { 
 	formatDateTime,
-	formatISOToYMD
+	formatISOToYMD,
+	formatISOtoFullDt
 } from './datetime';
