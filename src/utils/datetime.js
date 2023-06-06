@@ -12,12 +12,24 @@ export function formatDateTime(date) {
 	return formattedDateTime;
 }
 
-export function formatISOToYMD(strDate) {
-	const date = new Date(strDate);
+export function formatISOToYMD(ISOStr) {
+	const date = new Date(ISOStr);
 	const yyyy = date.getUTCFullYear();
 	const mm = String(date.getUTCMonth() + 1).padStart(2, '0');
 	const dd = String(date.getUTCDate()).padStart(2, '0');
 	const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+	return formattedDate;
+}
+
+export function formatISOtoFullDt(ISOStr) {
+	const date = new Date(ISOStr); // Convert to Date object
+	const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+						'July', 'August', 'September', 'October', 'November', 'December'];
+	const month = monthNames[date.getMonth()]; // Get month name
+	const day = date.getDate(); // Get day
+	const year = date.getFullYear(); // Get year
+	const formattedDate = `${month} ${day}, ${year}`; // Combine into desired format
 
 	return formattedDate;
 }
