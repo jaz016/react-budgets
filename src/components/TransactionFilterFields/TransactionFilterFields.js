@@ -4,22 +4,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Grid } from '@mui/material';
-import { useState } from 'react';
 
-function TransactionFilterFields() {
-
-	let [filterBy, setFilterBy] = useState('');
-
-	const handleChange = (e) => {
-		setFilterBy(e.target.value)
-	}
+function TransactionFilterFields({ searchTerm, filterBy, onSearchTermChange, onFilterByChange }) {
 
 	return (
 		<form>
 			<table style={{width: '100%'}}>
 				<tr>
 					<td><label for='search-for'><strong>Search</strong></label></td>
-					<td><TextField id="search-for" label="Enter transaction name, category or notes" variant="outlined" margin='normal' fullWidth sx={{background:'#fff'}} /></td>
+					<td>
+						<TextField 
+							id="search-for" 
+							label="Enter transaction name, category or notes" 
+							variant="outlined" 
+							margin='normal' 
+							fullWidth 
+							sx={{background:'#fff'}}
+							value={searchTerm}
+							onChange={(e) => onSearchTermChange(e.target.value)}
+						/>
+					</td>
 				</tr>
 				<tr>
 					<td><label for='filter-by'><strong>Filter by</strong></label></td>
@@ -31,7 +35,7 @@ function TransactionFilterFields() {
 									<Select
 										value={filterBy}
 										label="Transaction Type"
-										onChange={handleChange}
+										onChange={(e) => onFilterByChange(e.target.value)}
 									>
 										<MenuItem value={'item-1'}>Item 1</MenuItem>
 										<MenuItem value={'item-2'}>Item 2</MenuItem>

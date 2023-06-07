@@ -15,10 +15,14 @@ import {
 	formatISOtoFullDt 
 } from '../../utils';
 
-function TransactionList() {
+function TransactionList({ transactions, searchTerm, filterBy }) {
 
-	let [transactions, setTransactions] = useState([]);
-	let groupedTransactions = transactions.length ? transactions.reduce((acc,cur) => {
+	let filteredTransactions = searchTerm ? transactions.filter(transaction => {
+		const {name, category, notes} = transaction
+		return [name, category, notes].some(val => val.toLowerCase().includes(searchTerm.toLowerCase()));
+	}) : transactions;
+
+	let groupedTransactions = filteredTransactions.length ? filteredTransactions.reduce((acc,cur) => {
 		const dateYMD = formatISOToYMD(cur.datetime);
 		const groupIdx = acc.findIndex(t => formatISOToYMD(t.date) === dateYMD);
 
@@ -37,23 +41,7 @@ function TransactionList() {
 	}, []) : [];
 
 
-	useEffect(() => {
-		const loadTransactions = async () => {
-			const url = `http://localhost:8080/transactions/`;
-			try {
-				const data = await fetch(url);
-				const res = await data.json();
-
-				if(data.status === 200) {
-					setTransactions(res);
-				}
-			} catch (err) {
-				throw err;
-			}
-		}
-
-		loadTransactions();
-	}, [])
+	
 	
 	return (
 		<List>
