@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -5,7 +6,39 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Grid } from '@mui/material';
 
-function TransactionFilterFields({ searchTerm, filterBy, onSearchTermChange, onFilterByChange }) {
+function TransactionFilterFields({ searchTerm, filterBy, filterByVal, onSearchTermChange, onFilterByChange, onFilterByValChange }) {
+
+	// todo: warning - You have provided an out-of-range value for select component
+
+	const filterByOptions = [
+		{name: 'Transaction Type', slug: 'transaction-type'},
+		{name: 'Category', slug: 'category'}
+	];
+
+	const transactionTypes = [
+		{name: 'Income', slug: 'income'},
+		{name: 'Expense', slug: 'expense'}
+	]
+
+	let [categories, setCategories] = useState([]);
+
+	useEffect(() => {
+		const loadCategories = async () => {
+			const url = 'http://localhost:8080/categories';
+			try {
+				const res = await fetch(url);
+				const data = await res.json();
+
+				if(res.status === 200)
+					setCategories(data);
+					
+			} catch(err) {
+				throw err;
+			}
+		}
+
+		loadCategories();
+	}, [])
 
 	return (
 		<form>
@@ -31,28 +64,38 @@ function TransactionFilterFields({ searchTerm, filterBy, onSearchTermChange, onF
 						<Grid container columnSpacing={1}>
 							<Grid item xs={6}>
 								<FormControl margin='normal' fullWidth sx={{background:'#fff'}}>
-									<InputLabel>Transaction Type</InputLabel>
+									<InputLabel>Filter</InputLabel>
 									<Select
-										value={filterBy}
-										label="Transaction Type"
+										defaultValue=""
+										label="Filter"
 										onChange={(e) => onFilterByChange(e.target.value)}
 									>
-										<MenuItem value={'item-1'}>Item 1</MenuItem>
-										<MenuItem value={'item-2'}>Item 2</MenuItem>
-										<MenuItem value={'item-3'}>Item 3</MenuItem>
+										{
+											filterByOptions.map((item, i) => (
+												<MenuItem key={i} value={item.slug}>{item.name}</MenuItem>
+											))
+										}
 									</Select>
 								</FormControl>
 							</Grid>
 							<Grid item xs={6}>
-								<FormControl margin='normal' fullWidth sx={{background:'#fff'}}>
-									<InputLabel>Expense</InputLabel>
+								<FormControl margin='normal' fullWidth sx={{background:'#fff'}} disabled={filterBy === ''}>
+									<InputLabel>Value</InputLabel>
 									<Select
-										value={''}
-										label="Expense"
-										onChange={() => console.log(23)}
+										defaultValue=""
+										label="Value"
+										onChange={(e) => onFilterByValChange(e.target.value)}
 									>
-										<MenuItem value={'item-1'}>Item 1</MenuItem>
-										<MenuItem value={'item-2'}>Item 2</MenuItem>
+										{
+											filterBy === 'transaction-type' ? (
+												transactionTypes.map((item, i) => (
+													<MenuItem key={i} value={item.slug} selected={item.slug === filterByVal}>{item.name}</MenuItem>
+												))) : ( 
+											filterBy === 'category' ? (
+												categories.map(item => (
+													<MenuItem key={item.id} value={item.name} selected={item.name === filterByVal}>{item.name}</MenuItem>
+												))) : '')
+										}
 									</Select>
 								</FormControl>
 							</Grid>

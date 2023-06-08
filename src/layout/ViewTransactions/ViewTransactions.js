@@ -9,7 +9,7 @@ function ViewTransactions() {
 	const pageTitle = 'View Transactions';
 
 	let [transactions, setTransactions] = useState([]);
-
+	
 	let [searchTerm, setSearchTerm] = useState('');
 	let [filterBy, setFilterBy] = useState('');
 	let [filterByVal, setFilterByVal] = useState('');
@@ -31,7 +31,7 @@ function ViewTransactions() {
 		}
 
 		loadTransactions();
-	}, [])
+	}, []);
 
 	return (
 		<Grid container>
@@ -45,8 +45,13 @@ function ViewTransactions() {
 					<TransactionFilterFields
 						searchTerm={searchTerm} 
 						filterBy={filterBy}
+						filterByVal={filterByVal}
 						onSearchTermChange={(val) => setSearchTerm(val)} 
-						onFilterByChange={(val) => setFilterBy(val)} />
+						onFilterByChange={(val) => {
+							setFilterBy(val);
+							setFilterByVal('');
+						}} 
+						onFilterByValChange={(val) => setFilterByVal(val)}/>
 				</Grid>
 			</Grid>
 
@@ -54,6 +59,7 @@ function ViewTransactions() {
 				<TransactionList 
 					searchTerm={searchTerm} 
 					filterBy={filterBy}
+					filterByVal={filterByVal}
 					transactions={transactions}
 				/>
 			</Grid>

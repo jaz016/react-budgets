@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
@@ -15,13 +14,30 @@ import {
 	formatISOtoFullDt 
 } from '../../utils';
 
-function TransactionList({ transactions, searchTerm, filterBy }) {
+function TransactionList({ transactions, searchTerm, filterBy, filterByVal }) {
 
-	let filteredTransactions = searchTerm ? transactions.filter(transaction => {
+	// filter by search term
+	let filteredTransactionsByTerm = searchTerm ? transactions.filter(transaction => {
 		const {name, category, notes} = transaction
 		return [name, category, notes].some(val => val.toLowerCase().includes(searchTerm.toLowerCase()));
 	}) : transactions;
 
+	// filter further by filter fields
+	let filteredTransactions = filterByVal ? filteredTransactionsByTerm.filter(transaction => {
+		switch(filterBy) {
+			case 'transaction-type': 
+				return transaction.type === filterByVal;
+			case 'category': 
+				return transaction.category === filterByVal;
+			default: 
+				return false;
+		}
+	}) : filteredTransactionsByTerm;
+
+	// sort by most recent first
+	filteredTransactions.sort((x, y) => new Date(y.datetime) - new Date(x.datetime));
+
+	// grouped transactions by their date
 	let groupedTransactions = filteredTransactions.length ? filteredTransactions.reduce((acc,cur) => {
 		const dateYMD = formatISOToYMD(cur.datetime);
 		const groupIdx = acc.findIndex(t => formatISOToYMD(t.date) === dateYMD);
