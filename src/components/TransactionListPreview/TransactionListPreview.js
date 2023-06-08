@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom'
 import { formatMoney } from '../../utils';
 import List from '@mui/material/List';
@@ -10,33 +10,14 @@ import Divider from '@mui/material/Divider';
 import { Typography, Button } from "@mui/material";
 import { green, red } from '@mui/material/colors';
 
-function TransactionListPreview({ initTransactionList, onInitTransactionListChange }) {
+function TransactionListPreview({ transactions, isFetching }) {
 
-	let [transactions, setTransactions] = useState([]);
-	let [isFetching, setIsFetching] = useState(true);
 
 	const transactionBaseUrl = `/transaction/view`;
 	const editTransactionBaseUrl = `/transaction/edit`;
 
-	useEffect(() => {
-		
-		const itemLimit = 10;
-		const url = `http://localhost:8080/transactions?_sort=datetime&_order=desc&_limit=${itemLimit}`;
+	const sortedTransactions = transactions.length ? transactions.sort((x,y) => new Date(y.datetime) - new Date(x.datetime)).slice(0,10) : transactions;
 
-		if(initTransactionList) {
-			try {
-				fetch(url)
-				.then(res => res.json())
-				.then(data => {
-					setTransactions([...data]);
-					setIsFetching(false);
-					onInitTransactionListChange(false);
-				})
-			} catch(err) {
-				throw err;
-			}
-		}
-	}, [initTransactionList, onInitTransactionListChange])
 
 	return (
 		<>
@@ -47,7 +28,7 @@ function TransactionListPreview({ initTransactionList, onInitTransactionListChan
 			<List sx={{ maxHeight: '500px', overflowY: 'scroll' }}>
 				{
 					isFetching ? <span>Loading data...</span> : (
-						transactions.map((item, idx) => (
+						sortedTransactions.map(item => (
 							<Fragment key={item.id}>
 								<ListItem sx={{pl: 0}} secondaryAction={
 									<IconButton component={Link} to={`${editTransactionBaseUrl}/${item.id}`} edge="end" aria-label="edit">

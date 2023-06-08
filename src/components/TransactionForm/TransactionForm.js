@@ -99,7 +99,7 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 				body: JSON.stringify(payload)
 			});
 
-			const data = await res.json();
+			// const data = await res.json();
 			if(res.status === 201) {
 				resetForm();
 				onSubmitSuccess();
