@@ -14,6 +14,8 @@ function ViewTransactions() {
 	let [filterBy, setFilterBy] = useState('');
 	let [filterByVal, setFilterByVal] = useState('');
 
+	let [initTransactions, setInitTransactions] = useState(true);
+
 
 	useEffect(() => {
 		const loadTransactions = async () => {
@@ -24,14 +26,36 @@ function ViewTransactions() {
 
 				if(data.status === 200) {
 					setTransactions(res);
+					setInitTransactions(false);
 				}
 			} catch (err) {
 				throw err;
 			}
 		}
 
-		loadTransactions();
-	}, []);
+		if(initTransactions) {
+			loadTransactions();
+		}
+	}, [initTransactions]);
+
+	const handleDelete = async (transactionId) => {
+		if(window.confirm('Are you sure you want to delete this transaction?')) {
+			const url = `http://localhost:8080/transactions/${transactionId}`;
+			try {
+				const res = await fetch(url, {
+					method: 'DELETE'
+				});
+
+				if(res.status === 200) {
+					alert('Transaction has been deleted!');
+					setInitTransactions(true);
+				}
+				
+			} catch(err) {
+				throw err;
+			}
+		}
+	}
 
 	return (
 		<Grid container>
@@ -61,6 +85,7 @@ function ViewTransactions() {
 					filterBy={filterBy}
 					filterByVal={filterByVal}
 					transactions={transactions}
+					onDelete={(transactionId) => handleDelete(transactionId)}
 				/>
 			</Grid>
 			

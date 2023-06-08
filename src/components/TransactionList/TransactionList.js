@@ -14,7 +14,7 @@ import {
 	formatISOtoFullDt 
 } from '../../utils';
 
-function TransactionList({ transactions, searchTerm, filterBy, filterByVal }) {
+function TransactionList({ transactions, searchTerm, filterBy, filterByVal, onDelete }) {
 
 	// filter by search term
 	let filteredTransactionsByTerm = searchTerm ? transactions.filter(transaction => {
@@ -100,7 +100,7 @@ function TransactionList({ transactions, searchTerm, filterBy, filterByVal }) {
 													</Grid>
 													<Grid item xs={1} className='transaction-item-action'>
 														<IconButton>
-															<DeleteIcon />
+															<DeleteIcon onClick={() => onDelete(item2.id)}/>
 														</IconButton>
 													</Grid>
 												</Grid>
