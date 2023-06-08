@@ -48,7 +48,9 @@ function CreateTransaction() {
 			</Grid>
 
 			<Grid item lg={4}>
-				<TransactionPreview />
+				<TransactionPreview 
+					transactions={transactions} 
+				/>
 				<TransactionListPreview 
 					transactions={transactions}
 					isFetching={isFetching}
