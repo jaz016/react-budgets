@@ -12,7 +12,9 @@ function Dashboard() {
 	let [transactions, setTransactions] = useState([]);
 	let [isExpense, setIsExpense] = useState(true);
 
-	let filteredTransactions = transactions.filter(t => t.type === (isExpense ? 'expense' : 'income'));
+	// todo: for refactor
+	const filteredTransactions = transactions.filter(t => t.type === (isExpense ? 'expense' : 'income'));
+	const allExpenses = transactions.filter(t => t.type === 'expense');
 
 	// frequency: 'day','week','month'
 	const getTotals = (frequency) => {
@@ -23,10 +25,25 @@ function Dashboard() {
 						  .reduce((acc,cur) => acc + cur.amount, 0);
 	}
 
+	// frequency: 'day','week','month'
+	const getExpenseTotals = (frequency) => {
+		const start = dayjs().startOf(frequency);
+		const end = dayjs().endOf(frequency);
+
+		return allExpenses.filter(expense => dayjs(expense.datetime).isBetween(start, end, null, '[]'))
+						  .reduce((acc,cur) => acc + cur.amount, 0);
+	}
+
 	const totals = {
 		day: getTotals('day'),
 		week: getTotals('week'),
 		month: getTotals('month')
+	}
+
+	const expenseTotals = {
+		day: getExpenseTotals('day'),
+		week: getExpenseTotals('week'),
+		month: getExpenseTotals('month')
 	}
 
 
@@ -53,7 +70,7 @@ function Dashboard() {
 		<Grid item lg={12} sx={{ mb: 6, display: 'flex', justifyContent: 'space-between'}}>
 			{/* <Typography variant='h2' sx={{mt:4}}>Hello from React!</Typography> */}
 			<TransactionFilter isExpense={isExpense} onChange={handleTransactionTypeChange} />
-			<BudgetProgress />
+			<BudgetProgress totals={expenseTotals} />
 		</Grid>
 		<Grid item lg={12} sx={{ mb: 6, display: 'flex', justifyContent: 'space-between'}}>
 			<DashboardCounts totals={totals} />
