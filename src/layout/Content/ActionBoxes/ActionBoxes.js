@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
@@ -47,31 +48,27 @@ const theme = createTheme({
   });
 
 function ActionBoxes() {
+
+	const actionBoxes = [
+		{name: 'Create Transaction', slug: 'create-transaction', url: '/transaction/create', color: 'blue'},
+		{name: 'Manage Categories', slug: 'manage-categories', url: '/categories', color: 'orange'},
+		{name: 'View Transactions', slug: 'view-transactions', url: '/transaction/view', color: 'green'},
+		{name: 'View Reports', slug: 'view-reports', url: '/reports', color: 'indigo'},
+	]
+
 	return (
 		<Container>
-		<Grid container spacing={3}> 
-			<Grid item md='12' lg='6'>
-				<Paper elevation={6} sx={{height:'250px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease', ...theme.palette.blue}}>
-					<Typography variant='subtitle1'>Create Transaction</Typography>
-				</Paper>
-				
+			<Grid container spacing={3}>
+			{
+				actionBoxes.map((box,i) => (
+					<Grid key={i} item md='12' lg='6'>
+						<Paper className='action-box' component={Link} to={box.url} elevation={6} sx={{height:'250px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease', ...theme.palette[box.color]}}>
+							<Typography variant='subtitle1'>{box.name}</Typography>
+						</Paper>
+					</Grid>
+				))
+			}
 			</Grid>
-			<Grid item md='12' lg='6'>
-				<Paper elevation={6} sx={{height:'250px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease', ...theme.palette.orange}}>
-					<Typography variant='subtitle1'>Manage Categories</Typography>
-				</Paper>
-			</Grid>
-			<Grid item md='12' lg='6'>
-				<Paper elevation={6} sx={{height:'250px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease', ...theme.palette.green}}>
-					<Typography variant='subtitle1'>View Transactions</Typography>
-				</Paper>
-			</Grid>
-			<Grid item md='12' lg='6'>
-				<Paper elevation={6} sx={{height:'250px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease', ...theme.palette.indigo}}>
-					<Typography variant='subtitle1'>View Reports</Typography>
-				</Paper>
-			</Grid>
-		</Grid>
 		</Container>
 	)
 }

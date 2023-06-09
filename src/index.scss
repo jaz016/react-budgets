@@ -25,6 +25,7 @@ code {
     monospace;
 }
 
+@import './layout/Content/ActionBoxes/ActionBoxes.scss';
 @import './layout/Content/BudgetProgress/BudgetProgress.scss';
 @import './components/TransactionPreview/TransactionPreview.scss';
 @import './components/TransactionList/TransactionList.scss';

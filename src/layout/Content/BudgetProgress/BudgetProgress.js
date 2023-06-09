@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import LinearProgress from '@mui/material/LinearProgress';
+import IconButton from '@mui/material/IconButton';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import { formatMoney } from '../../../utils';
 
@@ -60,7 +62,9 @@ function BudgetProgress({ totals }) {
 				justifyContent: 'center',
 				alignItems: 'center'
 			}}>
-				<DriveFileRenameOutlineIcon />
+				<IconButton component={Link} to='/budgets'>
+					<DriveFileRenameOutlineIcon />
+				</IconButton>
 			</Grid>
 			
 			
