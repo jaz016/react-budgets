@@ -5,6 +5,10 @@ import { Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import { createTheme } from '@mui/material/styles';
 import { blue, green, orange, indigo } from '@mui/material/colors';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import PaidIcon from '@mui/icons-material/Paid';
+import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 
 const theme = createTheme({
 	palette: {
@@ -50,10 +54,10 @@ const theme = createTheme({
 function ActionBoxes() {
 
 	const actionBoxes = [
-		{name: 'Create Transaction', slug: 'create-transaction', url: '/transaction/create', color: 'blue'},
-		{name: 'Manage Categories', slug: 'manage-categories', url: '/categories', color: 'orange'},
-		{name: 'View Transactions', slug: 'view-transactions', url: '/transaction/view', color: 'green'},
-		{name: 'View Reports', slug: 'view-reports', url: '/reports', color: 'indigo'},
+		{name: 'Create Transaction', slug: 'create-transaction', url: '/transaction/create', icon: <EditCalendarIcon />, color: 'blue'},
+		{name: 'Manage Categories', slug: 'manage-categories', url: '/categories', icon: <AppRegistrationIcon />, color: 'orange'},
+		{name: 'View Transactions', slug: 'view-transactions', url: '/transaction/view', icon: <PaidIcon />, color: 'green'},
+		{name: 'View Reports', slug: 'view-reports', url: '/reports', icon: <TroubleshootIcon />, color: 'indigo'},
 	]
 
 	return (
@@ -63,6 +67,7 @@ function ActionBoxes() {
 				actionBoxes.map((box,i) => (
 					<Grid key={i} item md='12' lg='6'>
 						<Paper className='action-box' component={Link} to={box.url} elevation={6} sx={{height:'250px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s ease', ...theme.palette[box.color]}}>
+							{box.icon}
 							<Typography variant='subtitle1'>{box.name}</Typography>
 						</Paper>
 					</Grid>

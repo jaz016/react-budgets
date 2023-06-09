@@ -1,3 +1,10 @@
 .action-box {
 	text-decoration: none;
+	position: relative;
+
+	svg {
+		position: absolute;
+		font-size: 17rem;
+		opacity: 0.125;
+	}
 }
