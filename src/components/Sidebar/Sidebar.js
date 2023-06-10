@@ -62,11 +62,11 @@ function Sidebar() {
 						}
 						</List>
 
-						<ListItem disablePadding>
+						{/* <ListItem disablePadding>
 							<ListItemButton sx={{...padLeft,...marginY}}>
 								<ListItemText primary={'Log out'} />
 							</ListItemButton>
-						</ListItem>
+						</ListItem> */}
 					</div>
 					<div className='copyright' style={{padding: '0 32px',marginBottom: '5rem'}}>
 						<Typography variant='paragraph' sx={{display:'block'}}>Copyright &copy; 2023</Typography>

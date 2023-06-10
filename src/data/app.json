@@ -1,0 +1,10 @@
+{
+	"transactions": [],
+	"categories": [],
+	"budgets": {
+		"daily": 0,
+		"weekly": 0,
+		"monthly": 0,
+		"showInHomepage": ""
+	}
+}
