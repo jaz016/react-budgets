@@ -7,15 +7,9 @@ Play around with the app here! https://react-budgets-web.vercel.app/
 
 For demo purposes, a different branch was deployed at Vercel which utilizes `localStorage` for an easy storage solution per user.
 
+## Preview
 
-## Local Installation
-
-1. Make sure you have Node.js installed on your local machine
-2. Clone this repo 
-3. Navigate to the created folder via terminal and run `npm i`
-6. Afterwards, run `npm run dev` until the server listens at port 3000
-7. Go to your browser and type in http://localhost:3000/
-8. Happy coding!
+![sss](preview.JPG)
 
 
 ## Features
@@ -28,6 +22,16 @@ For demo purposes, a different branch was deployed at Vercel which utilizes `loc
 * Search transactions functionality
 * Filtering functionality
 * Edit/Delete logged transactions
+
+
+## Local Installation
+
+1. Make sure you have Node.js installed on your local machine
+2. Clone this repo 
+3. Navigate to the created folder via terminal and run `npm i`
+6. Afterwards, run `npm run dev` until the server listens at port 3000
+7. Go to your browser and type in http://localhost:3000/
+8. Happy coding!
 
 
 ## Few points
