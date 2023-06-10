@@ -239,9 +239,9 @@
 		}
 	],
 	"budgets": {
-		"daily": 0,
-		"weekly": 0,
-		"monthly": 0,
-		"showInHomepage": ""
+		"daily": 2000,
+		"weekly": 10000,
+		"monthly": 50000,
+		"showInHomepage": "weekly"
 	}
 }
