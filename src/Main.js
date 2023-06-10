@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom'
 import { Container } from '@mui/material';
@@ -6,11 +5,9 @@ import data from './data/app.json';
 
 function Main() {
 
-	useEffect(() => {
-		if (!localStorage.getItem('app')) {
-			localStorage.setItem('app', JSON.stringify(data))
-		}
-	}, [])
+	if (!localStorage.getItem('app')) {
+		localStorage.setItem('app', JSON.stringify(data))
+	}
 
 	return (
 		<>
