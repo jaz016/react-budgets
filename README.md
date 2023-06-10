@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# react-budgets
+A budget tracking app made from vanilla React. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live Demo
 
-## Available Scripts
+Play around with the app here! https://react-budgets-web.vercel.app/
 
-In the project directory, you can run:
+For demo purposes, a different branch was deployed at Vercel which utilizes `localStorage` for an easy storage solution per user.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Local Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Make sure you have Node.js installed on your local machine
+2. Clone this repo 
+3. Navigate to the created folder via terminal and run `npm i`
+6. Afterwards, run `npm run dev` until the server listens at port 3000
+7. Go to your browser and type in http://localhost:3000/
+8. Happy coding!
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+* Log expenses (or transactions) and keep track of your spending/earnings on a daily, weekly, and monthly basis
+* Set your own budgets
+* A progress bar to indicate your actual spending vs. your set budget
+* Manage your own categories in which transactions can be associated with
+* View a trail of all transactions grouped by day
+* Search transactions functionality
+* Filtering functionality
+* Edit/Delete logged transactions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Few points
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Transactions can be either be 'expense' or 'income'
+* Currency is set to Philippine Peso by default for now
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## TO-DOs
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Form validations
+* Reports section
+* Paginations
+* Currency customization
