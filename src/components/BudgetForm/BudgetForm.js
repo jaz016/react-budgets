@@ -17,23 +17,17 @@ function BudgetForm() {
 
 	useEffect(() => {
 		const loadBudgets = async () => {
-			const url = `http://localhost:8080/budgets/`;
-			try {
-				const data = await fetch(url);
-				const res = await data.json();
-				if(data.status === 200) {
-					setBudget(() => {
-						return {
-							daily: res.daily,
-							weekly: res.weekly,
-							monthly: res.monthly
-						}
-					});
-					setShowInHomepage(res.showInHomepage);
+			const data = localStorage.getItem('app');
+			const fetchedBudgets = JSON.parse(data).budgets;
+
+			setBudget(() => {
+				return {
+					daily: fetchedBudgets.daily,
+					weekly: fetchedBudgets.weekly,
+					monthly: fetchedBudgets.monthly
 				}
-			} catch (err) {
-				throw err;
-			}
+			});
+			setShowInHomepage(fetchedBudgets.showInHomepage);
 		}
 
 		loadBudgets();
@@ -41,21 +35,14 @@ function BudgetForm() {
 
 	
 	const handleSave = async (budgets) => {
-		const url = `http://localhost:8080/budgets/`;
-		const headers = {'Content-type': 'application/json'};
-		const payload = budgets;
-		try {
-			const data = await fetch(url, {
-				method: 'PUT',
-				headers,
-				body: JSON.stringify(payload)
-			});
-			if(data.status === 200) {
-				alert(`Budgets data has been successfully set!`);
-			}
-		} catch (err) {
-			throw err;
-		}
+		const data = localStorage.getItem('app');
+
+		const parsedData = JSON.parse(data);
+		const newBudgets = {...budgets};
+		parsedData.budgets = newBudgets
+		localStorage.setItem('app', JSON.stringify(parsedData));
+
+		alert(`Budgets data has been successfully set!`);
 	}
 
 	return (

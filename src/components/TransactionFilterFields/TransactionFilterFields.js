@@ -24,17 +24,8 @@ function TransactionFilterFields({ searchTerm, filterBy, filterByVal, onSearchTe
 
 	useEffect(() => {
 		const loadCategories = async () => {
-			const url = 'http://localhost:8080/categories';
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-
-				if(res.status === 200)
-					setCategories(data);
-					
-			} catch(err) {
-				throw err;
-			}
+			const data = localStorage.getItem('app');
+			setCategories(JSON.parse(data).categories);
 		}
 
 		loadCategories();

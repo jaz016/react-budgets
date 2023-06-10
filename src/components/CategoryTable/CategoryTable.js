@@ -14,17 +14,11 @@ function CategoryTable({initCategories, onEditClick, onDeleteSuccess, onInitCate
 	let [isFetching, setIsFetching] = useState(true);
 
 	useEffect(() => {
-		const loadCategories = async () => {
-			const url = 'http://localhost:8080/categories';
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-				setCategories(data);
-				setIsFetching(false);
-				onInitCategoriesChange(false)
-			} catch(err) {
-				throw err;
-			}
+		const loadCategories = () => {
+			const data = localStorage.getItem('app');
+			setCategories(JSON.parse(data).categories);
+			setIsFetching(false);
+			onInitCategoriesChange(false)
 		}
 
 		if(initCategories) {
@@ -35,20 +29,18 @@ function CategoryTable({initCategories, onEditClick, onDeleteSuccess, onInitCate
 
 	const handleDeleteClick = async (categoryId) => {
 		if(window.confirm('Are you sure you want to delete this category?')) {
-			const url = `http://localhost:8080/categories/${categoryId}`;
-			try {
-				const res = await fetch(url, {
-					method: 'DELETE'
-				});
+			const data = localStorage.getItem('app');
 
-				if(res.status === 200) {
-					alert('Category has been deleted!')
-					onDeleteSuccess();
-				}
-				
-			} catch(err) {
-				throw err;
+			const parsedData = JSON.parse(data);
+			const categoryIdx = parsedData.categories.findIndex(c => c.id === parseInt(categoryId));
+
+			if(categoryIdx !== -1) {
+				parsedData.categories.splice(categoryIdx,1);
+				localStorage.setItem('app', JSON.stringify(parsedData));
+				alert('Category has been deleted!')
+				onDeleteSuccess();
 			}
+
 		}
 	}
 

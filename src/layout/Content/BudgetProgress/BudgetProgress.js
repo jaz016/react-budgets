@@ -21,30 +21,24 @@ function BudgetProgress({ totals }) {
 	const progress = budget ? (actualSpent/budget)*100 <= 100 ? (actualSpent/budget)*100 : 100 : 0;
 
 	useEffect(() => {
-		const url = `http://localhost:8080/budgets/`;
-			try {
-				fetch(url)
-				.then(res => res.json())
-				.then(data => {
-					setBudgetShown(data.showInHomepage);
-					switch(data.showInHomepage) {
-						case 'daily':
-							setBudget(data.daily);
-							break;
-						case 'weekly':
-							setBudget(data.weekly);
-							break;
-						case 'monthly':
-							setBudget(data.monthly);
-							break;
-						default: 
-							setBudget(0);
-							break;
-					}
-				})
-			} catch(err) {
-				throw err;
-			}
+		const data = localStorage.getItem('app');
+		const fetchedBudgets = JSON.parse(data).budgets;
+
+		setBudgetShown(fetchedBudgets.showInHomepage);
+		switch(fetchedBudgets.showInHomepage) {
+			case 'daily':
+				setBudget(fetchedBudgets.daily);
+				break;
+			case 'weekly':
+				setBudget(fetchedBudgets.weekly);
+				break;
+			case 'monthly':
+				setBudget(fetchedBudgets.monthly);
+				break;
+			default: 
+				setBudget(0);
+				break;
+		}
 	}, [])
 
 

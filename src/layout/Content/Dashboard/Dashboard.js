@@ -48,16 +48,8 @@ function Dashboard() {
 
 
 	useEffect(() => {
-		const url = `http://localhost:8080/transactions/`;
-			try {
-				fetch(url)
-				.then(res => res.json())
-				.then(data => {
-					setTransactions(data);
-				})
-			} catch(err) {
-				throw err;
-			}
+		const data = localStorage.getItem('app');
+		setTransactions(JSON.parse(data).transactions);
 	}, []);
 
 

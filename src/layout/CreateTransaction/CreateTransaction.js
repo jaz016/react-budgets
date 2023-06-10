@@ -15,19 +15,11 @@ function CreateTransaction() {
 
 
 	useEffect(() => {
-		const url = `http://localhost:8080/transactions/`;
 		if(initTransactionList) {
-			try {
-				fetch(url)
-				.then(res => res.json())
-				.then(data => {
-					setTransactions(data);
-					setInitTransactionList(false);
-					setIsFetching(false);
-				})
-			} catch(err) {
-				throw err;
-			}
+			const data = localStorage.getItem('app');
+			setTransactions(JSON.parse(data).transactions);
+			setInitTransactionList(false);
+			setIsFetching(false);
 		}
 	}, [initTransactionList])
 

@@ -38,22 +38,16 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 	const filterByType = isExpense ? 'expense' : 'income';
 
 	useEffect(() => {
+		const loadTransaction = () => {
+			const data = localStorage.getItem('app');
+			const fetchedTransaction = JSON.parse(data).transactions.find(t => t.id === parseInt(id))
 
-		const loadTransaction = async () => {
-			const url = `http://localhost:8080/transactions/${id}`;
-	
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-				setIsExpense(data.type === 'expense');
-				setTransactionName(data.name);
-				setAmount(data.amount);
-				setCategory(data.category);
-				setDatetime(dayjs(new Date(data.datetime)));
-				setNotes(data.notes);
-			} catch(err) {
-				throw err;
-			}
+			setIsExpense(fetchedTransaction.type === 'expense');
+			setTransactionName(fetchedTransaction.name);
+			setAmount(fetchedTransaction.amount);
+			setCategory(fetchedTransaction.category);
+			setDatetime(dayjs(new Date(fetchedTransaction.datetime)));
+			setNotes(fetchedTransaction.notes);
 		}
 
 		if(id) {
@@ -63,24 +57,9 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 	}, [id]);
 
 	useEffect(() => {
-		let ignore = false;
-		const loadCategories = async () => {
-			const url = `http://localhost:8080/categories/?type=${filterByType}`;
-			try {
-				const res = await fetch(url);
-				const data = await res.json();
-				if(!ignore)
-					setCategories(data);
-			} catch(err) {
-				throw err;
-			}
-		}
-
-		loadCategories();
-		return () => {
-			ignore = true;
-		}
-		
+		const data = localStorage.getItem('app');
+		const filteredCategories = JSON.parse(data).categories.filter(category => category.type === filterByType)
+		setCategories(filteredCategories);		
 	}, [filterByType]);
 
 	const handleTransactionTypeChange = data => {
@@ -88,63 +67,51 @@ function TransactionForm({ isEdit, onSubmitSuccess }) {
 	}
 
 	const handleCreate = async (transaction) => {
-		const url = `http://localhost:8080/transactions/`;
-		const headers = {'Content-type': 'application/json'};
-		const payload = {...transaction, datetime: datetime.toISOString()};
 
-		try {
-			const res = await fetch(url, {
-				method: 'POST',
-				headers: headers,
-				body: JSON.stringify(payload)
-			});
+		const data = localStorage.getItem('app');
 
-			// const data = await res.json();
-			if(res.status === 201) {
-				resetForm();
-				onSubmitSuccess();
-			}
-		} catch(err) {
-			throw err;
-		}
+		const parsedData = JSON.parse(data);
+		const existingTransactions = parsedData.transactions;
+		const nextId = existingTransactions.length > 0 ? Math.max(...existingTransactions.map(t => t.id)) + 1 : 1
+		const newTransaction = {...transaction, id: nextId, datetime: datetime.toISOString()};
+		existingTransactions.push(newTransaction);
+		localStorage.setItem('app', JSON.stringify(parsedData));
+
+		resetForm();
+		onSubmitSuccess();
 	}
 
-	const handleSave = async (transactionId) => {
-		const url = `http://localhost:8080/transactions/${transactionId}`;
-		const headers = {'Content-type': 'application/json'};
-		const payload = {...transaction, datetime: datetime.toISOString()};
+	const handleSave = (transactionId) => {
 
-		try {
-			const res = await fetch(url, {
-				method: 'PUT',
-				headers: headers,
-				body: JSON.stringify(payload)
-			})
-			
-			if(res.status === 200) {
-				alert(`Transaction has been successfully edited!`);
-			}
-		} catch (err) {
-			throw err;
+		const data = localStorage.getItem('app');
+
+		const parsedData = JSON.parse(data);
+		const transactionIdx = parsedData.transactions.findIndex(t => t.id === parseInt(transactionId));
+
+		if(transactionIdx !== -1) {
+			const editedTransaction = {id: parseInt(transactionId), ...transaction, datetime: datetime.toISOString()};
+			parsedData.transactions[transactionIdx] = editedTransaction
+			localStorage.setItem('app', JSON.stringify(parsedData));
 		}
+
+		alert(`Transaction has been successfully edited!`);
 	}
 
 	const handleDelete = async (transactionId) => {
 		if(window.confirm('Are you sure you want to delete this transaction?')) {
-			const url = `http://localhost:8080/transactions/${transactionId}`;
-			try {
-				const res = await fetch(url, {
-					method: 'DELETE'
-				});
+			
+			const data = localStorage.getItem('app');
 
-				if(res.status === 200) {
-					alert('Transaction has been deleted!');
-					navigate('/transaction/create');
-				}
-				
-			} catch(err) {
-				throw err;
+			const parsedData = JSON.parse(data);
+			const transactionIdx = parsedData.transactions.findIndex(t => t.id === parseInt(transactionId));
+
+			if(transactionIdx !== -1) {
+				parsedData.transactions.splice(transactionIdx,1);
+				localStorage.setItem('app', JSON.stringify(parsedData));
 			}
+
+			alert('Transaction has been deleted!');
+			navigate('/transaction/create');
 		}
 	}
 

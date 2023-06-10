@@ -18,19 +18,10 @@ function ViewTransactions() {
 
 
 	useEffect(() => {
-		const loadTransactions = async () => {
-			const url = `http://localhost:8080/transactions/`;
-			try {
-				const data = await fetch(url);
-				const res = await data.json();
-
-				if(data.status === 200) {
-					setTransactions(res);
-					setInitTransactions(false);
-				}
-			} catch (err) {
-				throw err;
-			}
+		const loadTransactions = () => {
+			const data = localStorage.getItem('app');
+			setTransactions(JSON.parse(data).transactions);
+			setInitTransactions(false);
 		}
 
 		if(initTransactions) {
@@ -38,21 +29,18 @@ function ViewTransactions() {
 		}
 	}, [initTransactions]);
 
-	const handleDelete = async (transactionId) => {
+	const handleDelete = (transactionId) => {
 		if(window.confirm('Are you sure you want to delete this transaction?')) {
-			const url = `http://localhost:8080/transactions/${transactionId}`;
-			try {
-				const res = await fetch(url, {
-					method: 'DELETE'
-				});
+			const data = localStorage.getItem('app');
 
-				if(res.status === 200) {
-					alert('Transaction has been deleted!');
-					setInitTransactions(true);
-				}
-				
-			} catch(err) {
-				throw err;
+			const parsedData = JSON.parse(data);
+			const transactionIdx = parsedData.transactions.findIndex(t => t.id === parseInt(transactionId));
+
+			if(transactionIdx !== -1) {
+				parsedData.transactions.splice(transactionIdx,1);
+				localStorage.setItem('app', JSON.stringify(parsedData));
+				alert('Transaction has been deleted!');
+				setInitTransactions(true);
 			}
 		}
 	}

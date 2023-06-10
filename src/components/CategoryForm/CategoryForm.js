@@ -28,55 +28,38 @@ function CategoryForm({isEdit, toEdit, onCancelClick, onSubmitSuccess}) {
 		setIsExpense(data)
 	}
 
-	const handleCreate = async (category) => {
-		const url = `http://localhost:8080/categories/`;
-		const headers = {'Content-type': 'application/json'};
-		const payload = {
-			type: category.type,
-			name: category.name,
-		}
+	const handleCreate = (category) => {
 
-		try {
-			const res = await fetch(url, {
-				method: 'POST',
-				headers: headers,
-				body: JSON.stringify(payload)
-			});
+		const data = localStorage.getItem('app');
 
-			const data = await res.json();
-			if(res.status === 201) {
-				alert(`${data.name} category has been created!`);
-				resetForm();
-				onSubmitSuccess();
-			}
-		} catch(err) {
-			throw err;
-		}
+		const parsedData = JSON.parse(data);
+		const existingCategories = parsedData.categories;
+		const nextId = existingCategories.length > 0 ? Math.max(...existingCategories.map(c => c.id)) + 1 : 1
+		const newCategory = { id: nextId, type: category.type, name: category.name };
+		existingCategories.push(newCategory);
+		localStorage.setItem('app', JSON.stringify(parsedData));
+
+		alert(`${category.name} category has been created!`);
+		resetForm();
+		onSubmitSuccess();
 	}
 
 	const handleSave = async (categoryId) => {
-		const url = `http://localhost:8080/categories/${categoryId}`;
-		const headers = {'Content-type': 'application/json'};
-		const payload = {
-			type: isExpense ? 'expense' : 'income',
-			name: categoryName
+
+		const data = localStorage.getItem('app');
+
+		const parsedData = JSON.parse(data);
+		const categoryIdx = parsedData.categories.findIndex(c => c.id === parseInt(categoryId));
+
+		if(categoryIdx !== -1) {
+			const editedCategory = {id: parseInt(categoryId), type: isExpense ? 'expense' : 'income', name: categoryName};
+			parsedData.categories[categoryIdx] = editedCategory
+			localStorage.setItem('app', JSON.stringify(parsedData));
+			alert(`Category has been successfully edited!`);
+			resetForm();
+			onSubmitSuccess();
 		}
 
-		try {
-			const res = await fetch(url, {
-				method: 'PUT',
-				headers: headers,
-				body: JSON.stringify(payload)
-			})
-			
-			if(res.status === 200) {
-				alert(`Category has been successfully edited!`);
-				resetForm();
-				onSubmitSuccess();
-			}
-		} catch (err) {
-			throw err;
-		}
 	}
 
 	const resetForm = () => {
